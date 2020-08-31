@@ -9,16 +9,16 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        AppDbContext _context;
+        AppDbContext Context { get; }
 
         public HomeController()
         {
-            _context = new AppDbContext();
+            Context = new AppDbContext();
         }
 
         public IActionResult Index()
         {
-            var categorias = _context.Categorias
+            var categorias = Context.Categorias
                 .Include(c => c.Leiloes)
                 .Select(c => new CategoriaComInfoLeilao
                 {
@@ -42,7 +42,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         [Route("[controller]/Categoria/{categoria}")]
         public IActionResult Categoria(int categoria)
         {
-            var categ = _context.Categorias
+            var categ = Context.Categorias
                 .Include(c => c.Leiloes)
                 .First(c => c.Id == categoria);
             return View(categ);
@@ -54,7 +54,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         {
             ViewData["termo"] = termo;
             var termoNormalized = termo.ToUpper();
-            var leiloes = _context.Leiloes
+            var leiloes = Context.Leiloes
                 .Where(c =>
                     c.Titulo.ToUpper().Contains(termoNormalized) ||
                     c.Descricao.ToUpper().Contains(termoNormalized) ||
