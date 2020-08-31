@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Alura.LeilaoOnline.WebApp.Dados
+namespace Alura.LeilaoOnline.WebApp.Dados.EfCore
 {
-    public class LeilaoDAO
+    public class LeilaoDAO_EfCore : ILeilaoDAO
     {
         private AppDbContext Context { get; }
 
-        public LeilaoDAO()
+        public LeilaoDAO_EfCore()
         {
             Context = new AppDbContext();
         }
