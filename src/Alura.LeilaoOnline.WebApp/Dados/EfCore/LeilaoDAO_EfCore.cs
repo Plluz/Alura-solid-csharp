@@ -43,7 +43,7 @@ namespace Alura.LeilaoOnline.WebApp.Dados.EfCore
             Context.SaveChanges();
         }
 
-        public void Excluir(Leilao leilao)
+        public void Deletar(Leilao leilao)
         {
             Context.Leiloes.Remove(leilao);
             Context.SaveChanges();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Alura.LeilaoOnline.WebApp.Models;
 using Alura.LeilaoOnline.WebApp.Dados;
+using Alura.LeilaoOnline.WebApp.Services;
 
 namespace Alura.LeilaoOnline.WebApp.Controllers
 {
@@ -8,24 +9,24 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
     [Route("/api/leiloes")]
     public class LeilaoApiController : ControllerBase
     {
-        private ILeilaoDAO DAO { get; }
+        private IAdminService Service { get; }
 
-        public LeilaoApiController(ILeilaoDAO dao)
+        public LeilaoApiController(IAdminService service)
         {
-            DAO = dao;
+            Service = service;
         }
 
         [HttpGet]
         public IActionResult EndpointGetLeiloes()
         {
-            var leiloes = DAO.BuscarLeiloes();
+            var leiloes = Service.BuscarLeiloes();
             return Ok(leiloes);
         }
 
         [HttpGet("{id}")]
         public IActionResult EndpointGetLeilaoById(int id)
         {
-            var leilao = DAO.BuscarPorId(id);
+            var leilao = Service.BuscarLeilaoPorId(id);
             if (leilao == null)
             {
                 return NotFound();
@@ -36,26 +37,26 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         [HttpPost]
         public IActionResult EndpointPostLeilao(Leilao leilao)
         {
-            DAO.Inserir(leilao);
+            Service.InserirLeilao(leilao);
             return Ok(leilao);
         }
 
         [HttpPut]
         public IActionResult EndpointPutLeilao(Leilao leilao)
         {
-            DAO.Alterar(leilao);
+            Service.AlterarLeilao(leilao);
             return Ok(leilao);
         }
 
         [HttpDelete("{id}")]
         public IActionResult EndpointDeleteLeilao(int id)
         {
-            var leilao = DAO.BuscarPorId(id);
+            var leilao = Service.BuscarLeilaoPorId(id);
             if (leilao == null)
             {
                 return NotFound();
             }
-            DAO.Excluir(leilao);
+            Service.DeletarLeilao(leilao);
             return NoContent();
         }
 

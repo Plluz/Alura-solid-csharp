@@ -18,6 +18,6 @@ namespace Alura.LeilaoOnline.WebApp.Dados
 
         public void Alterar(Leilao leilao);
 
-        public void Excluir(Leilao leilao);
+        public void Deletar(Leilao leilao);
     }
 }
