@@ -15,7 +15,7 @@ namespace Alura.LeilaoOnline.WebApp
             services.AddTransient<ICategoriaDAO, CategoriaDAO_EfCore>();
             services.AddTransient<ILeilaoDAO, LeilaoDAO_EfCore>();
             services.AddTransient<IProdutoService, DefaultProdutoService>();
-            services.AddTransient<IAdminService, DefaultAdminService>();
+            services.AddTransient<IAdminService, ArquivamentoAdminService>();
             services.AddDbContext<AppDbContext>();
             services
                 .AddControllersWithViews()
