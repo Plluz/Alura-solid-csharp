@@ -1,13 +1,14 @@
-﻿using Alura.LeilaoOnline.WebApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Alura.LeilaoOnline.WebApp.Dados
 {
-    public interface ILeilaoDAO : IConsulta<Leilao>, IComando<Leilao>
+    public interface IComando<T>
     {
-
+        void Inserir(T obj);
+        void Alterar(T obj);
+        void Deletar(T obj);
     }
 }

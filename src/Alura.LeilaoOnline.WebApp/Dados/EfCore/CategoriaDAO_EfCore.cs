@@ -9,23 +9,23 @@ namespace Alura.LeilaoOnline.WebApp.Dados.EfCore
 {
     public class CategoriaDAO_EfCore : ICategoriaDAO
     {
-        AppDbContext _context;
+        private AppDbContext Context { get; }
 
         public CategoriaDAO_EfCore(AppDbContext context)
         {
-            _context = context;
+            Context = context;
         }
 
-        public Categoria BuscarCategoriaPorId(int id)
+        public Categoria BuscarPorId(int id)
         {
-            return _context.Categorias
+            return Context.Categorias
                 .Include(c => c.Leiloes)
                 .First(c => c.Id == id);
         }
 
-        public IEnumerable<Categoria> BuscarCategorias()
+        public IEnumerable<Categoria> BuscarTodos()
         {
-            return _context.Categorias
+            return Context.Categorias
                 .Include(c => c.Leiloes);
         }
     }
