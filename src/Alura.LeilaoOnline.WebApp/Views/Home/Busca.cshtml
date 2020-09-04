@@ -16,7 +16,7 @@
             </span>
             <h4>@leilao.Titulo</h4>
             <div class="content">
-                <p>@leilao.Descricao.Substring(0, 100)</p>
+                <p>@leilao.Descricao.Substring(0, Math.Min(leilao.Descricao.Length, 100))</p>
             </div>
         </article>
     }
